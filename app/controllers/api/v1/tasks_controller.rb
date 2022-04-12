@@ -7,19 +7,23 @@ class Api::V1::TasksController < ApplicationController
     render json: {results: @tasks }, status: :ok
   end
 
-  def show; end
+  def show
+    render json: {results: @task }, status: :ok
+  end
 
   def create
     @task = Task.new(task_params)
 
     if @task.save
-      render json: {results: @task }, status: :ok
+      @tasks = Task.all.order(:created_at)
+      render json: {results: @tasks }, status: :ok
     end
   end
 
   def update
     if @task.update(task_params)
-
+      @tasks = Task.all.order(:created_at)
+      render json: {results: @tasks }, status: :ok
     end
   end
 
