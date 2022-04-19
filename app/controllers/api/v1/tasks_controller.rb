@@ -15,15 +15,14 @@ class Api::V1::TasksController < ApplicationController
     @task = Task.new(task_params)
 
     if @task.save
-      @tasks = Task.all.order(:created_at)
-      render json: {results: @tasks }, status: :ok
+      render json: {results: @task }, status: :ok
     end
   end
 
   def update
     if @task.update(task_params)
-      @tasks = Task.all.order(:created_at)
-      render json: {results: @tasks }, status: :ok
+      # @tasks = Task.all.order(:created_at)
+      render json: {results: @task }, status: :ok
     end
   end
 
